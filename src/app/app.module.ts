@@ -29,7 +29,7 @@ import { RouterModule } from "@angular/router";
       { path: 'add-product', component: AddProductComponent },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
-    ]),
+    ], {useHash:false}),
     ProductModule
   ],
   providers: [],
