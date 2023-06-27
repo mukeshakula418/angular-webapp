@@ -2,20 +2,20 @@
     <div [hidden]="submitted">
         <h4>Add Product Form</h4>
         <form #addProductForm="ngForm" (ngSubmit)="onSubmit(addProductForm.value)">
-            <div class="form-floating mb-3">
-                <input id="productId" name="productId" type=number class="form-control" [(ngModel)]="iProduct.product_id"
-                       min="1" max="100"
-                       required #productIdField="ngModel"
-                       [class.field-error]="addProductForm.submitted && productIdField.invalid">
-                <label for="productId">Product Id</label>
-                <div [hidden]="!addProductForm.submitted || productIdField.valid"
-                     class="alert alert-danger">
-                    Product ID is required
-                </div>
-            </div>
+<!--            <div class="form-floating mb-3">-->
+<!--                <input id="productId" name="product_id" type=number class="form-control" [(ngModel)]="iProduct.product_id"-->
+<!--                       min="1" max="100"-->
+<!--                       required #productIdField="ngModel"-->
+<!--                       [class.field-error]="addProductForm.submitted && productIdField.invalid">-->
+<!--                <label for="productId">Product Id</label>-->
+<!--                <div [hidden]="!addProductForm.submitted || productIdField.valid"-->
+<!--                     class="alert alert-danger">-->
+<!--                    Product ID is required-->
+<!--                </div>-->
+<!--            </div>-->
             <div class="input-group mb-3">
                 <span class="input-group-text">Product Name</span>
-                <input id="productName" name="productName" type="text" class="form-control" [(ngModel)]="iProduct.product_name"
+                <input id="productName" name="product_name" type="text" class="form-control" [(ngModel)]="iProduct.product_name"
                        required #productNameField="ngModel"
                        [class.field-error]="addProductForm.submitted && productNameField.invalid">
                 <div [hidden]="!addProductForm.submitted || productNameField.valid"
@@ -25,7 +25,7 @@
             </div>
             <div class="form-group mb-3">
                 <label for="productCode">Product Code</label>
-                <select id="productCode" name="productCode" type="text" class="form-control" [(ngModel)]="iProduct.product_code"
+                <select id="productCode" name="product_code" type="text" class="form-control" [(ngModel)]="iProduct.product_code"
                        required #productCodeField="ngModel"
                        [class.field-error]="addProductForm.submitted && productCodeField.invalid">
                     <option *ngFor="let type of productCodes | async">
@@ -35,7 +35,7 @@
             </div>
             <div class="input-group mb-3">
                 <label class="input-group-text" for="releaseDate">Release Date</label>
-                <input id="releaseDate" name="releaseDate" type="Date" class="form-control" placeholder="releaseDate"
+                <input id="releaseDate" name="release_date" type="Date" class="form-control" placeholder="releaseDate"
                        [(ngModel)]="iProduct.release_date"
                        required #releaseDateField="ngModel"
                        [class.field-error]="addProductForm.submitted && releaseDateField.invalid">
@@ -46,7 +46,7 @@
             </div>
             <div class="input-group mb-3">
                 <label class="input-group-text" for="description">Description</label>
-                <textarea id="description" name="description" type="text" class="form-control"  rows="3" [(ngModel)]="iProduct.description"
+                <textarea id="description" name="product_description" type="text" class="form-control"  rows="3" [(ngModel)]="iProduct.product_description"
                           required #descriptionField="ngModel"
                           [class.field-error]="addProductForm.submitted && descriptionField.invalid"></textarea>
                 <div [hidden]="!addProductForm.submitted || descriptionField.valid"
@@ -69,7 +69,7 @@
             </div>
             <div class="input-group mb-3">
                 <span class="input-group-text">Star Rating</span>
-                <rating id="starRating" name="starRating" type=number class="form-control" aria-label="Rating (upto to 5)"
+                <rating id="starRating" name="rating" type=number class="form-control" aria-label="Rating (upto to 5)"
                         [(ngModel)]="iProduct.rating" [max]="max" [readonly]="isReadonly"
                         required #starRatingField="ngModel"
                         [class.field-error]="addProductForm.submitted && starRatingField.invalid && starRatingField.pristine">>
@@ -82,7 +82,7 @@
             </div>
             <div class="input-group mb-3">
                 <span class="input-group-text">Image Url</span>
-                <input id="imageUrl" name="imageUrl" class="form-control" [(ngModel)]="iProduct.image_link"
+                <input id="imageUrl" name="image_link" class="form-control" [(ngModel)]="iProduct.image_link"
                        required #imageUrlField="ngModel"
                        [class.field-error]="addProductForm.submitted && imageUrlField.invalid">
                 <span [hidden]="!addProductForm.submitted || imageUrlField.valid"
@@ -107,7 +107,7 @@
         </div>
         <div class="row">
             <div class="col-xs-3">Product Name</div>
-            <div class="col-xs-9">{{ model.productName }}</div>
+            <div class="col-xs-9">{{ model.product_name }}</div>
         </div>
         <div class="row">
             <div class="col-xs-3">Product Code</div>
@@ -119,7 +119,7 @@
         </div>
         <div class="row">
             <div class="col-xs-3">Description</div>
-            <div class="col-xs-9">{{ iProduct.description }}</div>
+            <div class="col-xs-9">{{ iProduct.product_description }}</div>
         </div>
         <div class="row">
             <div class="col-xs-3">Price</div>

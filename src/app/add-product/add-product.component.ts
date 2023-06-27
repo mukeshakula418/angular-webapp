@@ -24,7 +24,7 @@ export class AddProductComponent implements OnInit {
     product_code:'',
     product_name:"Product Name here..",
     release_date:'2022-10-10',
-    description:'Your notes here...',
+    product_description:'Your notes here...',
     price:10,
     rating:0,
     image_link:'https:imageUrl.com'
@@ -39,7 +39,7 @@ export class AddProductComponent implements OnInit {
     this.productCodes = this.productService.getProductCodes();
   }
 
-  model = new AddProduct(1,
+  model = new AddProduct(
       'Hammer',
       '1234',
       '',
@@ -72,7 +72,6 @@ export class AddProductComponent implements OnInit {
 
   newHero() {
     this.model = new AddProduct(
-        0,
         'Your Product name here',
         'Code here',
         'Todays Date',

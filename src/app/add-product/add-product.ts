@@ -1,12 +1,11 @@
 export class AddProduct {
     constructor(
-        public productId: number,
-        public productName: string,
-        public productCode: string,
-        public releaseDate: any,
+        public product_name: string,
+        public product_code: string,
+        public release_date: any,
         public price?: number,
-        public description?: string,
-        public starRating?: number,
-        public imageUrl?: string,
+        public product_description?: string,
+        public rating?: number,
+        public image_link?: string,
     ) {  }
 }

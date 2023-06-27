@@ -4,7 +4,7 @@ export interface IProduct {
   product_code: string;
   release_date: any;
   price: any;
-  description: string;
+  product_description: string;
   rating: number;
   image_link: string;
 }
