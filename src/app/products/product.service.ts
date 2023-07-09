@@ -1,47 +1,71 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import {Observable, catchError, tap, throwError, of} from "rxjs";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {Injectable} from "@angular/core";
+import {BehaviorSubject, catchError, map, Observable, of, tap, throwError} from "rxjs";
 
-import { IProduct } from "./product";
+import {IProduct} from "./product";
 import {NgForm} from "@angular/forms";
+import {environment} from "../../environments/environment";
+import {
+  getProductByIdQuery,
+  getProductExportQuery,
+  getProductsQuery,
+  insertProduct
+} from "../constants/webapp-query-constants";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  public productUrl ='http://localhost:3000/api/v1/webapp/getProduct/';
-  public productsUrl = 'http://localhost:3000/api/v1/webapp/getAllProducts';
-  public postProductUrl = 'http://localhost:3000/api/v1/webapp/saveProduct';
+  private readonly params: { headers: {'x-hasura-admin-secret':string}}
 
-  constructor(private http: HttpClient) { }
+  constructor(
+      private http: HttpClient
+  ) {
+    this.params = {
+      headers: {
+        'x-hasura-admin-secret': 'lg6xAHPKfgShb7F5Z6AdLqNcVM5kbSMRk6XVh2l0DXV6p41v1VlqyQeOcqv1Pu6e',
+      }
+    };
+  }
 
-  httpOptions = {
-    headers : {
-      'content-type': 'application/json',
-      'x-hasura-admin-secret': 'lg6xAHPKfgShb7F5Z6AdLqNcVM5kbSMRk6XVh2l0DXV6p41v1VlqyQeOcqv1Pu6e',
-    }
-  };
+  private readonly productData = new BehaviorSubject({});
+  sharedProductData = this.productData.asObservable();
+
+  getProducts(): Observable<IProduct[]> {
+    return this.http.post<any>(environment.WEBAPP_API_ENDPOINT, getProductsQuery(), this.params)
+        .pipe(
+            tap(res => console.log('All_getProducts  are::::\n', JSON.stringify(res))),
+      map(res => res.data.products),
+      catchError(this.handleError)
+    )
+  }
+
+  getProduct(id: number): Observable<IProduct> {
+    return this.http.post<any>(environment.WEBAPP_API_ENDPOINT, getProductByIdQuery(id), this.params)
+        .pipe(
+            tap(data => console.log('All_getProduct', JSON.stringify(data))),
+            map(res => res.data.products[0]),
+            catchError(this.handleError)
+        );
+  }
+
+  public getProductDetailsExport(productName: string) {
+    return this.http.post<IProduct>(environment.WEBAPP_API_ENDPOINT, getProductExportQuery(productName), this.params).pipe(
+        tap((data) => {
+          console.log('Service 2: ProductName in Service::::', productName);
+          console.log('Service 3: Inside getProductDetailsExport--ProductData::::data', data);
+          return data;
+        })
+    )
+  }
 
   getProductCodes():Observable<string[]> {
     return of(['Tools', 'Utilities','Grocery','Others'])
   }
 
-  getProduct(id:number): Observable<IProduct> {
-    return this.http.get<IProduct>(this.productUrl+id, this.httpOptions).pipe(tap(data => console.log('All_getProduct', JSON.stringify(data))),
-        catchError(this.handleError)
-    )
-  }
-
-  getProducts(): Observable<IProduct[]> {
-    console.log('getProducts details are::::');
-    return this.http.get<IProduct[]>(this.productsUrl, this.httpOptions).pipe(tap(data => console.log('All_getProducts  are::::\n', JSON.stringify(data))),
-      catchError(this.handleError)
-    )
-  }
-
   postProduct(iProduct: NgForm): Observable<IProduct> {
     console.log('In post call', iProduct)
-    return this.http.post<IProduct>(this.postProductUrl,iProduct, this.httpOptions)
+    return this.http.post<IProduct>(environment.WEBAPP_API_ENDPOINT, insertProduct(iProduct), this.params)
   }
 
   private handleError(err: HttpErrorResponse) {

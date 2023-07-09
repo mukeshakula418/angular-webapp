@@ -3,8 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  WEBAPP_API_ENDPOINT: 'https://in-monster-30.hasura.app/v1/graphql'
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file
