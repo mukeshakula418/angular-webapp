@@ -43,19 +43,19 @@ export class ProductService {
   getProduct(id: number): Observable<IProduct> {
     return this.http.post<any>(environment.WEBAPP_API_ENDPOINT, getProductByIdQuery(id), this.params)
         .pipe(
-            tap(data => console.log('All_getProduct', JSON.stringify(data))),
+            tap(res => console.log('All_getProduct', JSON.stringify(res))),
             map(res => res.data.products[0]),
             catchError(this.handleError)
         );
   }
 
   public getProductDetailsExport(productName: string) {
-    return this.http.post<IProduct>(environment.WEBAPP_API_ENDPOINT, getProductExportQuery(productName), this.params).pipe(
-        tap((data) => {
-          console.log('Service 2: ProductName in Service::::', productName);
-          console.log('Service 3: Inside getProductDetailsExport--ProductData::::data', data);
-          return data;
-        })
+    return this.http.post<any>(environment.WEBAPP_API_ENDPOINT, getProductExportQuery(productName), this.params)
+        .pipe(
+            tap((res) => {
+              console.log('Service 1: ProductName in Service::::', productName);
+              console.log('Service 2: Inside getProductDetailsExport--ProductData::::res::::', res);}),
+            map(res => res.data.products[0]),
     )
   }
 
