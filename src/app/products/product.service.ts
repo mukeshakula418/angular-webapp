@@ -6,6 +6,7 @@ import {IProduct} from "./product";
 import {NgForm} from "@angular/forms";
 import {environment} from "../../environments/environment";
 import {
+  deleteProductQuery,
   getProductByIdQuery,
   getProductExportQuery,
   getProductsQuery,
@@ -56,6 +57,7 @@ export class ProductService {
               console.log('Service 1: ProductName in Service::::', productName);
               console.log('Service 2: Inside getProductDetailsExport--ProductData::::res::::', res);}),
             map(res => res.data.products[0]),
+            catchError(this.handleError)
     )
   }
 
@@ -66,6 +68,17 @@ export class ProductService {
   postProduct(iProduct: NgForm): Observable<IProduct> {
     console.log('In post call', iProduct)
     return this.http.post<IProduct>(environment.WEBAPP_API_ENDPOINT, insertProduct(iProduct), this.params)
+  }
+
+  deleteProductById(id: number): Observable<IProduct> {
+    return this.http.post<any>(environment.WEBAPP_API_ENDPOINT, deleteProductQuery(id), this.params)
+        .pipe(
+            tap((res) => {
+              console.log('Service 1: ProductName in Service::::', id);
+              console.log('Service 2: Inside getProductDetailsExport--ProductData::::res::::', res);}),
+            map(res => res.data.delete_products.returning[0]),
+            catchError(this.handleError)
+        )
   }
 
   private handleError(err: HttpErrorResponse) {

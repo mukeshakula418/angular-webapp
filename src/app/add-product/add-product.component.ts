@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import { AddProduct } from "./add-product";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import { IProduct } from "../products/product";
 import { ProductService } from "../products/product.service";
-import {NgForm} from "@angular/forms";
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgForm } from "@angular/forms";
 
 @Component({
   selector: 'pm-add-product',
@@ -11,6 +12,7 @@ import {NgForm} from "@angular/forms";
   styleUrls: ['./add-product.component.css']
 })
 export class AddProductComponent implements OnInit {
+  sub!: Subscription;
   errorMessage: string = 'Unable to post the product at the moment';
   postError = false;
   postErrorMessage = '';
@@ -32,7 +34,11 @@ export class AddProductComponent implements OnInit {
 
   iProduct : IProduct = { ...this.defaultIProduct};
 
-  constructor(private productService: ProductService) { }
+  constructor(
+      private route: ActivatedRoute,
+      private router: Router,
+      private productService: ProductService
+  ) { }
 
   ngOnInit() {
     // this.releaseDate = new Date();
@@ -59,8 +65,11 @@ export class AddProductComponent implements OnInit {
     console.log("in Onsubmit:", newProduct);
     if(this.iProduct) {
       console.log('iProduct::', newProduct)
-      this.productService.postProduct(newProduct).subscribe(
-          result => console.log('success', result),
+      this.sub = this.productService.postProduct(newProduct).subscribe(
+          (result) => {
+            console.log('success', result);
+            this.router.navigate(['/products']);
+          },
           error => console.log('error', error)
       );
     } else {

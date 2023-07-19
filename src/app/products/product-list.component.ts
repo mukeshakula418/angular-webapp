@@ -17,9 +17,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
   sub!: Subscription;
 
   private _listFilter: string = '';
+
   get listFilter(): string {
     return this._listFilter;
   }
+
   set listFilter(value: string) {
     this._listFilter = value;
     console.log('In setter:', value);
@@ -37,8 +39,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
     console.log("filerBy::", filterBy)
     return this.products.filter((product: IProduct) =>
       product.product_name.toLocaleLowerCase().includes(filterBy));
-    // console.log('####',this.products.filter((product: IProduct) =>
-    //     product.productName.toLocaleLowerCase().includes(filterBy)));
   }
 
   toggleImage(): void {
@@ -55,7 +55,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
         this.products = products
         this.filteredProducts = products
       },
-      error: err => this.errorMessage = err
+      error: err => this.errorMessage = err,
+      complete: () => {
+        console.log('Observable completed');
+      }
     });
   }
 

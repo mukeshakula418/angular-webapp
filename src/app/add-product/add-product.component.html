@@ -1,7 +1,7 @@
 <div class="container">
     <div [hidden]="submitted">
         <h4>Add Product Form</h4>
-        <form #addProductForm="ngForm" (ngSubmit)="onSubmit(addProductForm.value)">
+        <form #addProductForm="ngForm" ngNativeValidate (ngSubmit)="onSubmit(addProductForm.value)">
 <!--            <div class="form-floating mb-3">-->
 <!--                <input id="productId" name="product_id" type=number class="form-control" [(ngModel)]="iProduct.product_id"-->
 <!--                       min="1" max="100"-->

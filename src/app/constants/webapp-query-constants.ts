@@ -88,6 +88,31 @@ export const insertProduct = (iProduct: any) => {
         }
     };
 };
+
+export const deleteProductQuery = (id: number) => {
+    const query = `
+    mutation deleteProduct($id:bigint) {
+        delete_products(where: {product_id: {_eq: $id}}) {
+        returning {
+              product_id
+              product_name
+              product_code
+              release_date
+              product_description
+              price
+              rating
+              image_link
+            }
+        }
+    }`;
+    return {
+        query,
+        variables: {
+            id,
+        }
+    };
+};
+
 // public getProductExportQuery1(productName: string) {
 //     const query = `query exportProduct($productName: String!) {
 //       products(where: {product_name: {_eq: $productName}}) {

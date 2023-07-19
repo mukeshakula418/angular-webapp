@@ -3,7 +3,6 @@ import {Observable, Subscription} from "rxjs";
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from './product';
 import {ProductService} from "./product.service";
-import {MouseEvent} from "ngx-bootstrap/utils/facade/browser";
 
 @Component({
   templateUrl: './product-detail.component.html',
@@ -14,11 +13,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   product: IProduct | undefined;
   sub!: Subscription;
   errorMessage: string = 'Error while retrieving the product';
-  private readonly setting = {
-    element: {
-      dynamicDownload: null as unknown as HTMLElement
-    }
-  };
   constructor(private route: ActivatedRoute,
               private router: Router,
               private productService: ProductService) { }
@@ -43,10 +37,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   onExport(productName:any) {
     this.sub = this.productService.getProductDetailsExport(productName).subscribe(
         (productData) => {
-          console.log('Component 1: productData inside compeont detail:::', productData);
+          console.log('Component 1: productData inside component detail:::', productData);
           const jsonFileName = `${productData.product_name}${'_'}${productData.product_code}${'_'}${productData.product_id}${".json"}`;
-          console.log('Component 2: jsonFileName inside compeont detail:::', jsonFileName);
-          this.dynamicDownloadByHtml({
+          console.log('Component 2: jsonFileName inside component detail:::', jsonFileName);
+          this.dynamicDownloadByFetch({
               fileName: jsonFileName,
               text: JSON.stringify(productData)
             });
@@ -55,18 +49,25 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     )
   }
 
-  private dynamicDownloadByHtml(arg: { fileName: string; text: string }) {
-    if (!this.setting.element.dynamicDownload) {
-      this.setting.element.dynamicDownload = document.createElement('a');
-    }
-    const element = this.setting.element.dynamicDownload;
-    const fileType = 'text/json';
-    element.setAttribute('href',`data:${fileType};charset=utf-8,${encodeURIComponent(arg.text)}`);
-    element.setAttribute('download', arg.fileName);
+  private async dynamicDownloadByFetch(arg: { fileName: string; text: string }) {
+    const element = document.createElement('a');
+    const fileType = 'application/json';
+    const file = new Blob([arg.text], {type: fileType});
 
-    // const event = new MouseEvent('click');
-    // element.dispatchEvent(event);
+    element.href = URL.createObjectURL(file);
+    element.download = arg.fileName;
+    element.click();
+  }
 
+  onDelete(id: any) {
+    console.log('Inside OnDelete Component 1:::', id);
+    console.log('Inside OnDelete Component 1:::Typeof', typeof id);
+    this.sub = this.productService.deleteProductById(id).subscribe(
+        (productData) => {
+          console.log('Inside OnDelete Component 2:::', productData);
+          this.router.navigate(['/products']);
+        }
+    )
   }
 
   ngOnDestroy(): void {
