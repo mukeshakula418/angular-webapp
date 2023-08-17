@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: angular-webapp-deploy
+  labels:
+    app: angular-webapp-deploy
+  namespace: project-ma
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: angular-webapp-deploy
+  template:
+    metadata:
+      labels:
+        app: angular-webapp-deploy
+    spec:
+      containers:
+        - name: angular-webapp-deploy
+          image: acrworkflow1692251389844.azurecr.io/image-workflow-1692251389844:latest
+          ports:
+            - containerPort: 80
