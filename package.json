@@ -6,7 +6,7 @@
     "start": "ng serve -o",
     "start:dev": "ng serve --configuration --open --ssl",
     "start:prod": "ng serve -o --configuration=production --open --ssl",
-    "build": "ng build --prod",
+    "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
