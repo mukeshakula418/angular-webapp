@@ -1,11 +1,23 @@
-FROM node:16
-ENV PORT 80
-EXPOSE 80
+FROM node:16-alpine AS builder
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-COPY package.json .
-RUN npm install
+WORKDIR /app
+
+# Copy the source code
 COPY . .
 
-CMD ["npm", "start"]
+# Install project dependencies
+RUN npm install
+
+# Build the application
+RUN npm run build
+
+# Stage 2: Serve the application with a lightweight HTTP server
+FROM nginx:alpine
+
+# Copy the built files from the previous stage
+COPY --from=builder /app/dist/angular-webapp /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
