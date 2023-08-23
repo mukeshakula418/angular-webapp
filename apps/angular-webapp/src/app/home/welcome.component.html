@@ -1,0 +1,265 @@
+﻿<!--Showcase -->
+<body>
+  <section
+    class="bg-dark text-light p-5 p-lg-0 pt-lg-5 text-center text-sm-start"
+  >
+    <div class="container">
+      <div class="d-sm-flex">
+        <div>
+          <h1>
+            Mukesh Akula
+            <span class="text-warning">Full Stack Developer</span>
+          </h1>
+          <p class="lead my-4">
+            I only focus on learning code and enjoy the life! “If I do a job in
+            30 minutes, it’s because I spent 10 years learning how to do that in
+            30 minutes. You owe me for the years not the minutes.” — Jeff Bezos
+          </p>
+          <button
+            class="btn btn-primary btn-lg"
+            data-bs-toggle="modal"
+            data-bs-target="#enroll"
+          >
+            Sign up Today!
+          </button>
+        </div>
+        <img
+          class="img-fluid w-50 d-sm-block"
+          src="/assets/images/mylogofinal.png"
+          alt="my-logo"
+        />
+      </div>
+    </div>
+  </section>
+  <!--  Newsletter -->
+  <section class="bg-primary text-light p-5">
+    <div class="container">
+      <div class="d-md-flex justify-content-between align-items-center">
+        <h3 class="mb-3 mb-md-0">Sign up for our Newsletter</h3>
+        <div class="input-group news-input">
+          <input
+            id="emailInput"
+            name="email"
+            type="email"
+            class="form-control"
+            placeholder="name@example.com"
+            [(ngModel)]="email"
+            required
+            #emailInput="ngModel"
+            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
+          />
+          <button
+            class="btn btn-dark btn-lg"
+            type="submit"
+            (click)="onSubmit(emailInput.value)"
+            [disabled]="emailInput.invalid"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--  Boxes -->
+  <section class="p-5">
+    <div class="container">
+      <div class="row text-center g-4">
+        <div class="col-md">
+          <div class="card bg-dark text-light">
+            <div class="card-body text-center">
+              <div class="h1 mb-3">
+                <i class="bi bi-laptop"></i>
+              </div>
+              <h3 class="card-title mb-3">Virtual</h3>
+              <p class="card-text">Hi, This is title of the laptop</p>
+              <a href="#" class="btn btn-primary">Read More</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="card bg-secondary text-light">
+            <div class="card-body text-center">
+              <div class="h1 mb-3">
+                <i class="bi bi-person-square"></i>
+              </div>
+              <h3 class="card-title mb-3">Hybrid</h3>
+              <p class="card-text">Hi, This is title of the laptop</p>
+              <a href="#" class="btn btn-dark">Read More</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="card bg-dark text-light">
+            <div class="card-body text-center">
+              <div class="h1 mb-3">
+                <i class="bi bi-people"></i>
+              </div>
+              <h3 class="card-title mb-3">In-person</h3>
+              <p class="card-text">Hi, This is title of the laptop</p>
+              <a href="#" class="btn btn-primary">Read More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="learn" class="p-5">
+    <div class="container">
+      <div class="row align-items-center justify-content-between">
+        <div class="col-md">
+          <img
+            src="assets/images/mylogofinal.png"
+            class="img-fluid"
+            alt="mylogo"
+          />
+        </div>
+        <div class="col-md p-5">
+          <h2>Learn The Fundamentals</h2>
+          <p class="lead">First paragraph- for writing the notes about you</p>
+          <p>Second paragraph- for writing the notes about you</p>
+          <a href="#" class="btn btn-light mt-3">
+            <i class="bi bi-chevron-right">Read More</i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="learn1" class="p-5 bg-dark text-light">
+    <div class="container">
+      <div class="row align-items-center justify-content-between">
+        <div class="col-md p-5">
+          <h2>Learn The Fundamentals</h2>
+          <p class="lead">First paragraph- for writing the notes about you</p>
+          <p>Second paragraph- for writing the notes about you</p>
+          <a href="#" class="btn btn-light mt-3">
+            <i class="bi bi-chevron-right">Read More</i>
+          </a>
+        </div>
+        <div class="col-md">
+          <img
+            src="assets/images/mylogofinal.png"
+            class="img-fluid"
+            alt="mylogo"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="learn3" class="p-5">
+    <div class="container">
+      <div class="row align-items-center justify-content-between">
+        <div class="col-md">
+          <img
+            src="assets/images/mylogofinal.png"
+            class="img-fluid"
+            alt="mylogo"
+          />
+        </div>
+        <div class="col-md p-5">
+          <h2>Learn The Fundamentals</h2>
+          <p class="lead">First paragraph- for writing the notes about you</p>
+          <p>Second paragraph- for writing the notes about you</p>
+          <a href="#" class="btn btn-light mt-3">
+            <i class="bi bi-chevron-right">Read More</i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer class="p-5 bg-dark text-white text-center position-relative">
+    <div class="container">
+      <p class="lead">Copyright &copy; 2021 Frontend Bootcamp</p>
+      <a href="#" class="position-absolute bottom-0 end-0 p-5">
+        <i class="bi bi-arrow-up-circle h1"></i>
+      </a>
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="enroll"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Details form</h1>
+        </div>
+        <div class="modal-body">
+          <p class="lead">
+            Please fill in your details and we'll get back to you!
+          </p>
+          <form
+            #promoForm="ngForm"
+            ngNativeValidate
+            (ngSubmit)="onSubmit(promoForm.value)"
+          >
+            <div class="mb-3">
+              <label class="col-form-label">First Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="first-name"
+                name="first_name"
+                [ngModel]="promo.first_name"
+                required
+                #firstNameField="ngModel"
+              />
+              <label for="last-name" class="col-form-label">Last Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="last-name"
+                name="last_name"
+                [(ngModel)]="promo.last_name"
+                required
+                #lastNameField="ngModel"
+              />
+              <label for="email" class="col-form-label">Email:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="email"
+                name="email"
+                [(ngModel)]="promo.email"
+                required
+                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
+                #emailField="ngModel"
+              />
+              <label for="phone" class="col-form-label">Phone:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="phone"
+                name="contact"
+                [(ngModel)]="promo.contact"
+                required
+                #contactField="ngModel"
+              />
+            </div>
+            <div class="modal-footer">
+              <button
+                type="submit"
+                class="btn btn-success"
+                [disabled]="!promoForm.form.valid"
+              >
+                Submit
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

@@ -1,0 +1,28 @@
+div.card-header {
+  font-size: large;
+}
+
+div.card {
+  margin-top: 100px;
+}
+
+.table {
+  margin-top: 10px;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+thead {
+  color: #337ab7;
+}
+
+.narrow-column {
+  max-width: 150px; /* Adjust this value as needed */
+  overflow: hidden; /* Truncate content if it overflows */
+}

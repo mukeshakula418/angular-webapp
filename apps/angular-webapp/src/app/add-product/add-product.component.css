@@ -1,0 +1,9 @@
+.ng-invalid:not(form).ng-touched {
+  border: 1px solid red;
+}
+
+.form-control {
+  background-color: floralwhite;
+  font-size: larger;
+  table-layout: auto;
+}

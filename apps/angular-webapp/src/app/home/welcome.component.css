@@ -1,0 +1,22 @@
+/*using sudo selector before to add ghost padding*/
+/*body::before {*/
+/*    display: block;*/
+/*    content: 'ghost padding here!';*/
+/*    height: 60px;*/
+/*}*/
+
+@media (min-width: 768px) {
+  .news-input {
+    width: 50%;
+  }
+}
+
+.ng-invalid:not(form).ng-touched {
+  border: 1px solid red;
+}
+
+.form-control {
+  background-color: floralwhite;
+  font-size: larger;
+  table-layout: auto;
+}

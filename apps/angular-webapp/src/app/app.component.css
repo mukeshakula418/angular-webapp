@@ -1,0 +1,10 @@
+.nav-link {
+  font-size: large;
+}
+
+.navbar-brand {
+  font-style: italic;
+  font-family: Charter, monospace;
+  font-weight: bolder;
+  font-size: xx-large;
+}

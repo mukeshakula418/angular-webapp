@@ -1,0 +1,95 @@
+{
+  "name": "angular-webapp",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "generators": {},
+  "sourceRoot": "apps/angular-webapp/src",
+  "prefix": "ma",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "dist/apps/angular-webapp",
+        "index": "apps/angular-webapp/src/index.html",
+        "main": "apps/angular-webapp/src/main.ts",
+        "polyfills": "apps/angular-webapp/src/polyfills.ts",
+        "tsConfig": "apps/angular-webapp/tsconfig.app.json",
+        "assets": [
+          "apps/angular-webapp/src/favicon.ico",
+          "apps/angular-webapp/src/assets",
+          "apps/angular-webapp/src/api"
+        ],
+        "styles": [
+          "apps/angular-webapp/src/styles.css",
+          "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "1000kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/angular-webapp/src/environments/environment.ts",
+              "with": "apps/angular-webapp/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "angular-webapp:build:production"
+        },
+        "development": {
+          "browserTarget": "angular-webapp:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "angular-webapp:build"
+      }
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "apps/angular-webapp/src/test.ts",
+        "polyfills": "apps/angular-webapp/src/polyfills.ts",
+        "tsConfig": "apps/angular-webapp/tsconfig.spec.json",
+        "karmaConfig": "apps/angular-webapp/karma.conf.js",
+        "assets": [
+          "apps/angular-webapp/src/favicon.ico",
+          "apps/angular-webapp/src/assets"
+        ],
+        "styles": ["apps/angular-webapp/src/styles.css"],
+        "scripts": []
+      }
+    }
+  }
+}

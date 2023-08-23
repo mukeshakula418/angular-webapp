@@ -1,0 +1,119 @@
+<div class="card">
+  <div class="card-header">
+    {{ pageTitle + '--' + product?.product_name }}
+    <div *ngIf="!product?.isEdit">
+      <button class="btn btn-outline-secondary" (click)="onEdit(product)">
+        Edit
+      </button>
+      <button
+        class="btn btn-outline-danger delete-button ms-auto"
+        (click)="onDelete(product?.product_id)"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+  <div class="card-footer">
+    <div class="card-body" *ngIf="product">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-4">Name:</div>
+            <div *ngIf="product.isEdit">
+              <input type="text" [(ngModel)]="product.product_name" />
+            </div>
+            <div *ngIf="!product.isEdit" class="col-md-8">
+              {{ product.product_name }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Code:</div>
+            <div *ngIf="product.isEdit">
+              <input type="text" [(ngModel)]="product.product_code" />
+            </div>
+            <div *ngIf="!product.isEdit" class="col-md-8">
+              {{ product.product_code | lowercase | convertToSpaces : '-' }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Description:</div>
+            <div *ngIf="product.isEdit">
+              <input type="text" [(ngModel)]="product.product_description" />
+            </div>
+            <div *ngIf="!product.isEdit" class="col-md-8">
+              {{ product.product_description }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Availability:</div>
+            <div *ngIf="product.isEdit">
+              <input type="text" [(ngModel)]="product.release_date" />
+            </div>
+            <div *ngIf="!product.isEdit" class="col-md-8">
+              {{ product.release_date }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Price:</div>
+            <div *ngIf="product.isEdit">
+              <input type="text" [(ngModel)]="product.price" />
+            </div>
+            <div *ngIf="!product.isEdit" class="col-md-8">
+              {{ product.price }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Rating:</div>
+            <div *ngIf="product.isEdit">
+              <input type="text" [(ngModel)]="product.rating" />
+            </div>
+            <div *ngIf="!product.isEdit" class="col-md-8">
+              {{ product.rating }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Image URL:</div>
+            <div *ngIf="product.isEdit">
+              <input type="text" [(ngModel)]="product.image_link" />
+            </div>
+            <div *ngIf="!product.isEdit" class="col-md-8">
+              {{ product.image_link }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="product?.isEdit" class="col-md-4 d-flex">
+      <button
+        type="button"
+        class="btn btn-outline-success mr-2"
+        (click)="onSave(product?.product_id, product)"
+      >
+        Save
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-danger export-button"
+        (click)="onCancel(product)"
+      >
+        Cancel
+      </button>
+    </div>
+    <div *ngIf="!product?.isEdit" class="col-md-4 d-flex">
+      <button
+        class="btn btn-outline-secondary mr-2"
+        style="width: 80px"
+        (click)="onBack()"
+      >
+        <i class="fa fa-chevron-left"></i> Back
+      </button>
+      <button
+        class="btn btn-outline-secondary export-button"
+        style="width: 100px"
+        (click)="onExport(product?.product_name)"
+      >
+        Export <i class="fa fa-download"></i>
+      </button>
+    </div>
+  </div>
+</div>
